@@ -2,12 +2,24 @@
 
 import { useState, useEffect } from 'react';
 import { Zap, Shield, BarChart3, ArrowRight, CheckCircle, Star, Globe, Lock, Rocket, Users, TrendingUp, Cpu } from 'lucide-react';
-// import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navbar';
 // import Footer from '@/components/Footer';
+import { motion } from "framer-motion";
+
+import { useContext } from "react";
+import { ThemeContext } from "./theme";
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
   const [currentFeature, setCurrentFeature] = useState(0);
+
+  // Safely consume ThemeContext; if provider isn't available for some reason
+  // fall back to checking the document root class (client-only).
+  const themeCtx = useContext(ThemeContext) || {};
+  const darkMode = themeCtx.darkMode ?? (typeof window !== "undefined" && document.documentElement.classList.contains("dark"));
+
+   // or loading state
+
 
   useEffect(() => {
     setMounted(true);
@@ -61,25 +73,25 @@ export default function LandingPage() {
 
   const testimonials = [
     {
-      name: "Sarah Chen",
+      name: "Jay Sarkar",
       role: "Marketing Director",
-      company: "TechFlow Inc",
+      company: "Infocare",
       content: "Shortly increased our campaign CTR by 47%. The analytics helped us understand our audience better than ever.",
-      avatar: "SC"
+      avatar: "JS"
     },
     {
-      name: "Marcus Rodriguez",
+      name: "Vinay Reddy",
       role: "Growth Lead",
-      company: "StartupXYZ",
+      company: "StockPro",
       content: "The API integration was seamless. We shortened 50K+ links in our first month with zero downtime.",
-      avatar: "MR"
+      avatar: "VR"
     },
     {
-      name: "Emily Watson",
+      name: "Astha Sharma",
       role: "Social Media Manager",
-      company: "Creative Agency Co",
+      company: "Creatico",
       content: "Our team loves the custom domains and branded links. It's made our social media campaigns much more professional.",
-      avatar: "EW"
+      avatar: "AS"
     }
   ];
 
@@ -139,7 +151,7 @@ export default function LandingPage() {
   if (!mounted) {
     return (
       <div className="min-h-screen flex flex-col">
-        {/* <Navbar /> */}
+        { /*<Navbar />*/ }
         <main className="flex-1 flex items-center justify-center">
           <div className="animate-pulse text-lg">Loading...</div>
         </main>
@@ -149,11 +161,70 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
+   
       {/* <Navbar /> */}
 
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/20" />
+    <section className="relative overflow-hidden flex flex-col min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-900 text-slate-950 transition-bg">
+      <div
+        className="
+          absolute inset-0 overflow-hidden 
+  [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)] 
+  [--dark-gradient:repeating-linear-gradient(100deg,var(--black)_0%,var(--black)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--black)_16%)] 
+  [--aurora:repeating-linear-gradient(100deg,var(--blue-500)_10%,var(--indigo-300)_15%,var(--blue-300)_20%,var(--violet-200)_25%,var(--blue-400)_30%)] 
+  [background-image:var(--white-gradient),var(--aurora)] 
+  dark:[background-image:var(--dark-gradient),var(--aurora)] 
+  [background-size:300%,_200%] 
+  [background-position:50%_50%,50%_50%] 
+  filter blur-[10px] invert dark:invert-0 
+  pointer-events-none 
+  absolute -inset-[10px] opacity-50 
+  will-change-transform 
+  after:content-[''] 
+  after:absolute 
+  after:inset-0 
+  after:[background-image:var(--white-gradient),var(--aurora)] 
+  after:dark:[background-image:var(--dark-gradient),var(--aurora)] 
+  after:[background-size:200%,_100%] 
+  after:animate-aurora 
+  after:[background-attachment:fixed] 
+  after:mix-blend-difference 
+  [mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,var(--transparent)_70%)]
+
+        "
+      ></div>
+
+      <motion.div
+        initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        viewport={{ once: true }}
+        className="relative flex flex-col gap-4 items-center justify-center px-4"
+      >
+
+        {/* Your contents here, e.g. headings or text */}
+        <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+                Short Links,
+              </span>
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
+                Big Impact
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Transform long URLs into powerful, trackable short links that drive engagement,
+              deliver insights, and boost your marketing ROI. Enterprise-grade features,
+              startup-friendly pricing.
+            </p>
+      
+    
+
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
@@ -170,21 +241,6 @@ export default function LandingPage() {
               Trusted by 500,000+ businesses worldwide
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-                Short Links,
-              </span>
-              <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
-                Big Impact
-              </span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Transform long URLs into powerful, trackable short links that drive engagement,
-              deliver insights, and boost your marketing ROI. Enterprise-grade features,
-              startup-friendly pricing.
-            </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -205,6 +261,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
+      </motion.div>
       </section>
 
       {/* Features Section */}
