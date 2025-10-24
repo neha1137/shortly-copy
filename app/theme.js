@@ -4,6 +4,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const ThemeContext = createContext();
 
+
 export default function ThemeProvider({ children }) {
   const [darkMode, setDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -35,3 +36,5 @@ export default function ThemeProvider({ children }) {
     </ThemeContext.Provider>
   );
 }
+
+
