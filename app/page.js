@@ -194,7 +194,7 @@ export default function LandingPage() {
 
             "
           >
-            <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
+            <div className="min-h-screen flex flex-col bg-white dark:bg-blue-900 transition-colors duration-300">
           </div>
           </div>
 
@@ -212,7 +212,7 @@ export default function LandingPage() {
 
             {/* Your contents here, e.g. headings or text */}
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-purple-600 dark:from-blue-400 dark:to-purple-400">
                     Short Links,
                   </span>
                   <br />
@@ -220,7 +220,7 @@ export default function LandingPage() {
                     Big Impact
                   </span>
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-xl md:text-2xl text-gray-600 dark:text-white-700 mb-8 max-w-3xl mx-auto leading-relaxed">
                   Transform long URLs into powerful, trackable short links that drive engagement,
                   deliver insights, and boost your marketing ROI. Enterprise-grade features,
                   startup-friendly pricing.
