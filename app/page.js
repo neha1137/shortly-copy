@@ -194,12 +194,12 @@ export default function LandingPage() {
 
             "
           >
-            <div className="min-h-screen flex flex-col bg-white dark:bg-blue-900 transition-colors duration-300">
+            <div className="min-h-screen flex flex-col bg-red-300 dark:bg-blue-900/90 transition-colors duration-300">
           </div>
           </div>
 
           <motion.div
-            initial={{ opacity: 0.0, y: 40 }}
+            initial={{ opacity: 0.9, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{
               delay: 0.3,
@@ -212,11 +212,11 @@ export default function LandingPage() {
 
             {/* Your contents here, e.g. headings or text */}
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-purple-600 dark:from-blue-500 dark:to-purple-900">
                     Short Links,
                   </span>
                   <br />
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-900 dark:from-purple-600 dark:to-pink-700">
                     Big Impact
                   </span>
                 </h1>
