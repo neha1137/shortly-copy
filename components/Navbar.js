@@ -95,12 +95,12 @@ export default function Navbar({ onThemeChange, className = "" }) {
               {/* Clerk Auth Buttons */}
               <SignedOut>
                 <SignInButton mode="modal">
-                  <button className="text-blue-900 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                  <button className="text-black-900 dark:text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                     Sign In
                   </button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl">
+                  <button className="bg-gradient-to-r from-gray-800 to-purple-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl">
                     Get Started Free
                   </button>
                 </SignUpButton>
