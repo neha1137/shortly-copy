@@ -6,6 +6,7 @@ import { Zap, Shield, BarChart3, ArrowRight, CheckCircle, Star, Globe, Lock, Roc
 // import Footer from '@/components/Footer';
 // import * as dotenv from 'dotenv';
 // dotenv.config();
+import { motion } from "framer-motion";
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -63,21 +64,21 @@ export default function LandingPage() {
 
   const testimonials = [
     {
-      name: "Sarah Chen",
+      name: "Jay Sarkar",
       role: "Marketing Director",
       company: "TechFlow Inc",
       content: "Shortly increased our campaign CTR by 47%. The analytics helped us understand our audience better than ever.",
       avatar: "SC"
     },
     {
-      name: "Marcus Rodriguez",
+      name: "Maran Reddy",
       role: "Growth Lead",
       company: "StartupXYZ",
       content: "The API integration was seamless. We shortened 50K+ links in our first month with zero downtime.",
       avatar: "MR"
     },
     {
-      name: "Emily Watson",
+      name: "Astha Sharma",
       role: "Social Media Manager",
       company: "Creative Agency Co",
       content: "Our team loves the custom domains and branded links. It's made our social media campaigns much more professional.",
@@ -150,73 +151,112 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
+          <div className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* Aurora Background - Fixed to entire page */}
+      <div
+        className="
+          fixed inset-0 overflow-hidden -z-10
+          [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)] 
+          [--dark-gradient:repeating-linear-gradient(100deg,var(--black)_0%,var(--black)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--black)_16%)] 
+          [--aurora:repeating-linear-gradient(100deg,var(--blue-500)_10%,var(--indigo-300)_15%,var(--blue-300)_20%,var(--violet-200)_25%,var(--blue-400)_30%)] 
+          [background-image:var(--white-gradient),var(--aurora)] 
+          dark:[background-image:var(--dark-gradient),var(--aurora)] 
+          [background-size:300%,200%] 
+          [background-position:50%_50%,50%_50%] 
+          filter blur-[10px] invert dark:invert-0 
+          pointer-events-none 
+          opacity-50 
+          will-change-transform 
+          after:content-[''] 
+          after:absolute 
+          after:inset-0 
+          after:[background-image:var(--white-gradient),var(--aurora)] 
+          after:dark:[background-image:var(--dark-gradient),var(--aurora)] 
+          after:[background-size:200%,_100%] 
+          after:animate-aurora 
+          after:[background-attachment:fixed] 
+          after:mix-blend-difference
+        "
+      />
+
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse dark:bg-purple-900 dark:opacity-10"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse dark:bg-yellow-900 dark:opacity-10"></div>
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse dark:bg-blue-900 dark:opacity-10"></div>
+      </div>
+
       {/* <Navbar /> */}
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/20" />
+      <section className="relative flex flex-col min-h-screen items-center justify-center px-6 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          viewport={{ once: true }}
+          className="relative flex flex-col gap-4 items-center justify-center px-4 max-w-6xl mx-auto text-center"
+        >
 
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse dark:bg-purple-900 dark:opacity-10"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse dark:yellow-purple-900 dark:opacity-10"></div>
-          <div className="absolute bottom-20 left-20 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse dark:blue-purple-900 dark:opacity-10"></div>
-        </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-purple-600 dark:from-blue-500 dark:to-purple-900">
+              Short Links,
+            </span>
+            <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-900 dark:from-purple-600 dark:to-pink-700">
+              Big Impact
+            </span>
+          </h1>
 
-        <div className="relative container mx-auto px-6 py-24">
-          <div className="max-w-6xl mx-auto text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium mb-8">
-              <Star className="w-4 h-4 mr-2 fill-current" />
-              Trusted by 500,000+ businesses worldwide
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-                Short Links,
-              </span>
-              <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
-                Big Impact
-              </span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Transform long URLs into powerful, trackable short links that drive engagement,
-              deliver insights, and boost your marketing ROI. Enterprise-grade features,
-              startup-friendly pricing.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <button className="group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                <span className="flex items-center">
-                  Start Free Trial
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-              <button className="group border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300">
-                <span className="flex items-center">
-                  Watch Demo
-                  <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                  </svg>
-                </span>
-              </button>
-            </div>
+          {/* Badge */}
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">
+            <Star className="w-4 h-4 mr-2 fill-current" />
+            Trusted by 500,000+ businesses worldwide
           </div>
-        </div>
+
+          <p className="text-xl md:text-2xl text-gray-900 dark:text-white mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up text-center">
+            Transform long URLs into powerful, trackable short links that drive engagement,
+            deliver insights, and boost your marketing ROI. Enterprise-grade features,
+            startup-friendly pricing.
+          </p>
+
+          <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200 text-center mb-12">
+            Whether you are growing a business, running a campaign, or just streamlining 
+            your personal links, our platform makes sharing seamless, professional, and secure.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button className="group relative bg-gradient-to-r from-gray-800 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+              <span className="flex items-center">
+                Start Free Trial
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+            <button className="group border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300">
+              <span className="flex items-center">
+                Watch Demo
+                <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </motion.div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 bg-gray-50 dark:bg-gray-800/50">
+      <section id="features" className="relative py-24 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Why Choose Shortly?
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-gray-700 dark:text-gray-300">
               Everything you need to create, manage, and analyze your short links in one powerful platform.
             </p>
           </div>
@@ -229,10 +269,11 @@ export default function LandingPage() {
                   {features.map((feature, index) => (
                     <div
                       key={index}
-                      className={`p-6 rounded-2xl transition-all duration-500 cursor-pointer ${currentFeature === index
-                        ? 'bg-white dark:bg-gray-800 shadow-xl scale-105 border-2 border-blue-500/20'
-                        : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 hover:shadow-lg'
-                        }`}
+                      className={`p-6 rounded-2xl transition-all duration-500 cursor-pointer ${
+                        currentFeature === index
+                          ? 'bg-white dark:bg-gray-800 shadow-xl scale-105 border-2 border-blue-500/20'
+                          : 'bg-gray-300/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 hover:shadow-lg'
+                      }`}
                       onMouseEnter={() => setCurrentFeature(index)}
                     >
                       <div className="flex items-start space-x-4">
@@ -256,7 +297,7 @@ export default function LandingPage() {
               </div>
 
               <div className="relative">
-                <div className="relative h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl shadow-2xl overflow-hidden">
+                <div className="relative h-96 bg-gradient-to-br from-gray-900 to-purple-600 rounded-3xl shadow-2xl overflow-hidden">
                   <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
                   <div className="absolute inset-0 flex items-center justify-center p-8">
                     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 w-full max-w-sm border border-white/20">
@@ -266,7 +307,7 @@ export default function LandingPage() {
                       </div>
                       <div className="space-y-3">
                         <div className="bg-white/20 rounded-lg p-3 text-white text-sm">
-                          shortly.xyz/spring-sale
+                          shortly.xyz/your-custom-link
                         </div>
                         <div className="flex justify-between text-white/80 text-sm">
                           <span>Clicks: 2,847</span>
@@ -283,7 +324,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-white dark:bg-gray-900">
+      <section className="relative py-24 bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -298,10 +339,10 @@ export default function LandingPage() {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105"
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-gray-800 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">
                     {testimonial.avatar}
                   </div>
                   <div>

@@ -27,7 +27,7 @@ export default function Navbar() {
     <>
       {/* Navbar for logged-in users */}
       <SignedIn>
-        <nav className="bg-white dark:bg-gray-900 shadow-sm p-4 flex justify-between items-center">
+        <nav className="bg-white dark:bg-gray-900 shadow-sm p-4 flex justify-between items-center backdrop-blur-sm border-b border-gray-700 dark:border-gray-900 sticky top-0 z-50">
           <Link href="/" className="font-bold text-xl">Shortly</Link>
           <div className="flex items-center space-x-4">
             {/* 3 links for logged-in users */}
@@ -46,7 +46,7 @@ export default function Navbar() {
 
       {/* Navbar for logged-out users */}
       <SignedOut>
-        <nav className="bg-white dark:bg-gray-900 shadow-sm p-4 flex justify-between items-center">
+        <nav className="bg-white dark:bg-gray-900 shadow-sm p-4 flex justify-between items-center backdrop-blur-sm border-b border-gray-700 dark:border-gray-900 sticky top-0 z-50">
           <Link href="/" className="font-bold text-xl">Shortly</Link>
           <div className="flex items-center space-x-4">
             {/* 3 links for logged-out users */}
@@ -58,7 +58,7 @@ export default function Navbar() {
               <button className="hover:text-blue-600">Sign In</button>
             </SignInButton>
             <SignUpButton mode="modal">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+              <button className="bg-gradient-to-r from-gray-800 to-purple-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl">
                 Get Started
               </button>
             </SignUpButton>
