@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import clientPromise from "@/lib/mongodb";
+import prisma from "@/lib/prisma";
 
 function NotFound({ shorturl }) {
     return (
@@ -12,7 +12,7 @@ function NotFound({ shorturl }) {
 }
 
 export default async function Page({ params }) {
-    const { shorturl } = params;
+    const { shorturl } = await Promise.resolve(params);
 
     if (!shorturl) {
         redirect(process.env.NEXT_PUBLIC_HOST || "/");
@@ -23,10 +23,10 @@ export default async function Page({ params }) {
 
     let doc;
     try {
-        const client = await clientPromise;
-        const db = client.db("bitlinks");
-        const collection = db.collection("url");
-        doc = await collection.findOne({ shorturl: cleanShorturl });
+    // ✅ fixed shadowing bug — don't redeclare doc
+    doc = await prisma.url.findUnique({
+      where: { shorturl: cleanShorturl },
+    });
     } catch (error) {
         console.error("❌ MongoDB error:", error);
         redirect(process.env.NEXT_PUBLIC_HOST || "/");

@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Zap, Shield, BarChart3, ArrowRight, CheckCircle, Star, Globe, Lock, Rocket, Users, TrendingUp, Cpu } from 'lucide-react';
 // import Navbar from '@/components/Navbar';
 // import Footer from '@/components/Footer';
+// import * as dotenv from 'dotenv';
+// dotenv.config();
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);

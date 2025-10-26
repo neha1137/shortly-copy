@@ -1,60 +1,72 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+// app/api/generate/route.js
 import { NextResponse } from "next/server";
-
-const uri = "mongodb+srv://penguin624:dbpassword@cluster0.qffywjm.mongodb.net/?retryWrites=true&w=majority";
-let client;
-let db;
+import  prisma  from "@/lib/prisma"; // use named export
+import { getAuth } from "@clerk/nextjs/server";
 
 export async function POST(request) {
-    try {
-        const body = await request.json();
-        console.log("🚀 Received body:", body);
+  try {
+    // ✅ Pass the request to auth() to get the logged-in user
+    const { userId } = getAuth(request);
 
-        if (!body.url || !body.shorturl) {
-            console.log("❌ Missing url or shorturl");
-            return NextResponse.json({ success: false, message: "Missing url or shorturl" });
-        }
-
-        if (!client) {
-            client = new MongoClient(uri, {
-                serverApi: {
-                    version: ServerApiVersion.v1,
-                    strict: true,
-                    deprecationErrors: true,
-                },
-            });
-            await client.connect();
-            db = client.db("bitlinks");
-            console.log("✅ Connected to MongoDB");
-        }
-
-        const collection = db.collection("url");
-
-        const existing = await collection.findOne({ shorturl: body.shorturl });
-        console.log("🔍 Existing doc:", existing);
-
-        if (existing) {
-            console.log("⚠️ URL already exists");
-            return NextResponse.json({ success: false, message: "URL already exists" });
-        }
-
-        let fullUrl = body.url;
-        if (!fullUrl.startsWith("http://") && !fullUrl.startsWith("https://")) {
-            fullUrl = "https://" + fullUrl;
-        }
-
-
-
-        const result = await collection.insertOne({
-            url: fullUrl,
-            shorturl: body.shorturl,
-        });
-
-        console.log("✅ Inserted document:", result);
-
-        return NextResponse.json({ success: true, message: "URL Generated Successfully" });
-    } catch (err) {
-        console.error("❌ API Error:", err);
-        return NextResponse.json({ success: false, message: "Internal Server Error" });
+    if (!userId) {
+      return NextResponse.json({
+        success: false,
+        message: "User not signed in",
+      });
     }
+
+    const body = await request.json();
+    console.log("🚀 Received body:", body);
+
+    if (!body.url || !body.shorturl) {
+      console.log("❌ Missing url or shorturl");
+      return NextResponse.json({
+        success: false,
+        message: "Missing url or shorturl",
+      });
+    }
+
+    const { url, shorturl } = body;
+
+    // ✅ Check if short URL already exists
+    const existing = await prisma.url.findFirst({
+      where: { shorturl },
+    });
+    console.log("🔍 Existing doc:", existing);
+
+    if (existing) {
+      console.log("⚠️ URL already exists");
+      return NextResponse.json({
+        success: false,
+        message: "URL already exists",
+      });
+    }
+
+    // ✅ Normalize URL (ensure it starts with http/https)
+    let fullUrl = url.trim();
+    if (!/^https?:\/\//i.test(fullUrl)) {
+      fullUrl = "https://" + fullUrl;
+    }
+
+    // ✅ Save to DB with userId
+    const data = await prisma.url.create({
+      data: {
+        url: fullUrl,
+        shorturl,
+        userId,
+      },
+    });
+    console.log("✅ Inserted document:", data);
+
+    return NextResponse.json({
+      success: true,
+      message: "URL Generated Successfully",
+    });
+  } catch (err) {
+    console.error("❌ API Error:", err);
+    return NextResponse.json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
 }

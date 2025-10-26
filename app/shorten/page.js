@@ -31,6 +31,7 @@ export default function Shorten() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ url, shorturl: finalShort }),
+                credentials: "include",
             });
 
             const result = await response.json();
